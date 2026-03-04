@@ -6,7 +6,7 @@ import "dotenv/config";
 export const register = async (req, res) => {
   const { fullName, email, password } = req.body;
 
-  const existingUser = await User.findOne(email);
+  const existingUser = await User.findOne({ email });
 
   if (existingUser)
     return res
@@ -19,7 +19,12 @@ export const register = async (req, res) => {
     .update(password)
     .digest("hex");
 
-  const user = await User.create({ fullName, email, hashedPassword });
+  const user = await User.insertOne({
+    fullName,
+    email,
+    password: hashedPassword,
+    salt,
+  });
 
   return res.status(200).json({ user });
 };
