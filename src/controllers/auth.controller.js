@@ -57,3 +57,11 @@ export const logIn = async (req, res) => {
 
   return res.status(200).json({ status: "Success", data: { token } });
 };
+
+//Get Logged in User
+export const getLoggedInUser = async (req, res) => {
+  const user = req.user;
+  if (!user) return res.status(401).json({ error: "user is not logged in" });
+
+  res.json({ message: "Welcome User", data: user });
+};
