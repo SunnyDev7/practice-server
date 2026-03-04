@@ -14,6 +14,8 @@ try {
   console.log(error);
 }
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Welcome to practice server");
 });
