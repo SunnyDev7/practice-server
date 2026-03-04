@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema({
     require: true,
     minlength: [3, "Password should be minimum of 3 or more characters"],
   },
+  salt: {
+    type: String,
+  },
 });
 
 export const User = mongoose.model("User", UserSchema);
